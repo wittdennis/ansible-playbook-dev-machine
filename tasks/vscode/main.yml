@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Install vscode based on system
+  ansible.builtin.include_tasks:
+    file: vscode.{{ ansible_os_family | lower }}.yml

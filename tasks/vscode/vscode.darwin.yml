@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Print install hint
+  ansible.builtin.debug:
+    msg: "To install vscode add it as a homebrew package for mac"

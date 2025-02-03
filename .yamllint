@@ -1,0 +1,17 @@
+---
+extends: default
+ignore:
+  - .github
+  - .pre-commit-config.yaml
+  - atlantis.yaml
+rules:
+  line-length:
+    max: 240
+    level: warning
+  comments:
+    min-spaces-from-content: 1
+  braces:
+    max-spaces-inside: 1
+    max-spaces-inside-empty: 0
+  indentation:
+    indent-sequences: true

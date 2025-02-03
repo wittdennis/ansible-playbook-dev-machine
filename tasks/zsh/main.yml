@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Setup zsh based on system
+  ansible.builtin.include_tasks:
+    file: zsh.{{ ansible_system | lower }}.yml

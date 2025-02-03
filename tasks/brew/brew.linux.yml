@@ -1,0 +1,120 @@
+---
+- name: Set prefix dir variable
+  ansible.builtin.set_fact:
+    homebrew_linux_prefix: "/home/linuxbrew/.linuxbrew"
+
+- name: Set brew paths
+  ansible.builtin.set_fact:
+    homebrew_linux_brew_bin_path: "{{ homebrew_linux_prefix }}/bin"
+    homebrew_linux_install_path: "{{ homebrew_linux_prefix }}/Homebrew"
+
+- name: Determine Homebrew ownership variables
+  ansible.builtin.set_fact:
+    homebrew_user: "{{ homebrew_user | default(ansible_user_id) }}"
+    homebrew_group: "{{ homebrew_group | default(ansible_user_gid) }}"
+
+- name: Create prefix directory
+  become: true
+  ansible.builtin.file:
+    path: "{{ homebrew_linux_prefix }}"
+    state: directory
+    owner: "{{ homebrew_user }}"
+    group: "{{ homebrew_group }}"
+    mode: "0755"
+
+- name: Check if homebrew already exists.
+  ansible.builtin.stat:
+    path: "{{ homebrew_linux_brew_bin_path }}/brew"
+  register: pre_installed_brew
+
+- name: Ensure Homebrew directory exists.
+  ansible.builtin.file:
+    path: "{{ homebrew_linux_install_path }}"
+    owner: "{{ homebrew_user }}"
+    group: "{{ homebrew_group }}"
+    state: directory
+    mode: "0755"
+  become: true
+
+# Clone Homebrew.
+- name: Ensure Homebrew is installed.
+  ansible.builtin.git:
+    repo: "{{ homebrew_repo }}"
+    version: "{{ homebrew_version }}"
+    dest: "{{ homebrew_linux_install_path }}"
+    remote: origin
+    clone: true
+  become: true
+  become_user: "{{ homebrew_user }}"
+  when: not pre_installed_brew.stat.exists
+
+# Adjust Homebrew permissions.
+- name: Ensure proper permissions and ownership on homebrew_linux_brew_bin_path dirs.
+  ansible.builtin.file:
+    path: "{{ homebrew_linux_brew_bin_path }}"
+    state: directory
+    owner: "{{ homebrew_user }}"
+    group: "{{ homebrew_group }}"
+    mode: "0775"
+  become: true
+
+- name: Ensure proper ownership on homebrew_linux_install_path subdirs.
+  ansible.builtin.file:
+    path: "{{ homebrew_linux_install_path }}"
+    state: directory
+    owner: "{{ homebrew_user }}"
+    group: "{{ homebrew_group }}"
+    recurse: true
+    follow: false
+  become: true
+
+- name: Create homebrew directories in prefix path
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: "{{ homebrew_user }}"
+    group: "{{ homebrew_group }}"
+    mode: "0775"
+    state: directory
+  loop:
+    - "{{ homebrew_linux_prefix }}/bin"
+    - "{{ homebrew_linux_prefix }}/etc"
+    - "{{ homebrew_linux_prefix }}/include"
+    - "{{ homebrew_linux_prefix }}/lib"
+    - "{{ homebrew_linux_prefix }}/sbin"
+    - "{{ homebrew_linux_prefix }}/share"
+    - "{{ homebrew_linux_prefix }}/share/{{ ansible_user_shell.split('/')[-1] }}"
+    - "{{ homebrew_linux_prefix }}/share/{{ ansible_user_shell.split('/')[-1] }}/site-functions"
+    - "{{ homebrew_linux_prefix }}/var"
+    - "{{ homebrew_linux_prefix }}/opt"
+    - "{{ homebrew_linux_prefix }}/var/homebrew"
+    - "{{ homebrew_linux_prefix }}/var/homebrew/linked"
+    - "{{ homebrew_linux_prefix }}/Cellar"
+    - "{{ homebrew_linux_prefix }}/Caskroom"
+    - "{{ homebrew_linux_prefix }}/Frameworks"
+
+- name: Check if homebrew binary is already in place.
+  ansible.builtin.stat:
+    path: "{{ homebrew_linux_brew_bin_path }}/brew"
+  register: homebrew_binary
+  check_mode: false
+
+- name: Symlink brew to homebrew_linux_brew_bin_path.
+  ansible.builtin.file:
+    src: "{{ homebrew_linux_install_path }}/bin/brew"
+    dest: "{{ homebrew_linux_brew_bin_path }}/brew"
+    state: link
+  when: not homebrew_binary.stat.exists
+  become: true
+
+- name: Install brew dependencies
+  when: ansible_os_family == "RedHat"
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - procps-ng
+      - curl
+      - file
+      - "@Development Tools"
+    state: present
+    update_cache: true

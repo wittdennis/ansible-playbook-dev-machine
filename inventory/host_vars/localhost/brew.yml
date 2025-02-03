@@ -1,0 +1,65 @@
+---
+homebrew_repo: https://github.com/Homebrew/brew
+homebrew_version: "4.4.19" # renovate: datasource=github-releases depName=Homebrew/brew versioning=semver
+
+homebrew_mac_packages:
+  - yadm
+  - kubectl
+  - helm
+  - go
+  - ansible
+  - ansible-lint
+  - azure-cli
+  - cilium-cli
+  - cocogitto
+  - git
+  - goreleaser
+  - hcloud
+  - helm-docs
+  - jq
+  - k9s
+  - krew
+  - kubectx
+  - kubelogin
+  - pipx
+  - nvm
+  - podman
+  - restic
+  - socket_vmnet
+  - tfenv
+  - terraform-docs
+  - tflint
+  - yq
+homebrew_mac_casks:
+  - visual-studio-code
+  - ghostty
+  - dotnet-sdk
+  - firefox
+  - ente-auth
+  - git-credential-manager
+  - rectangle
+  - soundsource
+  - stats
+  - termius
+  - slack
+
+homebrew_linux_packages:
+  - yadm
+  - kubectl
+  - helm
+  - cilium-cli
+  - cocogitto
+  - golangci-lint
+  - goreleaser
+  - hcloud
+  - helm-docs
+  - k9s
+  - krew
+  - kubectx
+  - kubelogin
+  - restic
+  - tfenv
+  - terraform-docs
+  - tflint
+  - yq
+homebrew_linux_casks: []

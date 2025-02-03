@@ -1,0 +1,9 @@
+---
+# list of packages that should be installed on linux systems
+linux_packages:
+  - gnome-tweaks
+  - g++
+  - jq
+  - podman
+  - wireguard-tools
+  - dotnet-sdk-9.0

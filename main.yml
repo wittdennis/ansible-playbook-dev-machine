@@ -1,0 +1,76 @@
+# code: language=ansible
+---
+- name: Configure host
+  hosts: all
+  tasks:
+    - name: Print ansible facts
+      ansible.builtin.debug:
+        var: ansible_facts
+        verbosity: 3
+
+    - name: Setup zsh terminal
+      tags: [terminal]
+      ansible.builtin.import_tasks:
+        file: tasks/zsh/main.yml
+
+    - name: Install brew
+      tags: [brew]
+      ansible.builtin.import_tasks:
+        file: tasks/brew/main.yml
+
+    - name: Setup vscode
+      tags: [vscode]
+      ansible.builtin.import_tasks:
+        file: tasks/vscode/main.yml
+
+    - name: Setup azure-cli
+      tags: [azure_cli]
+      ansible.builtin.import_tasks:
+        file: tasks/azure_cli/main.yml
+
+    - name: Setup ghostty
+      tags: [ghostty]
+      ansible.builtin.import_tasks:
+        file: tasks/ghostty/main.yml
+
+    - name: Setup ente-auth
+      tags: [ente_auth]
+      ansible.builtin.import_tasks:
+        file: tasks/ente_auth/main.yml
+
+    - name: Install packages on linux
+      tags: [linux_packages]
+      when: (ansible_system | lower) == 'linux'
+      ansible.builtin.import_tasks:
+        file: tasks/linux_packages/main.yml
+
+    - name: Install golang
+      tags: [golang]
+      ansible.builtin.import_tasks:
+        file: tasks/golang/main.yml
+
+    - name: Install krew plugins
+      tags: [krew_plugins]
+      ansible.builtin.import_tasks:
+        file: tasks/krew_plugins/main.yml
+
+    - name: Install pipx plugins
+      tags: [pipx_packages]
+      ansible.builtin.import_tasks:
+        file: tasks/pipx_packages/main.yml
+
+    - name: Setup dotfiles
+      tags: [dotfiles]
+      ansible.builtin.import_tasks:
+        file: tasks/yadm/main.yml
+
+  post_tasks:
+    - name: Print finish message
+      ansible.builtin.debug:
+        msg: |
+          Playbook finished successfully. To ensure all changes take effect you have to logout and login again.
+
+          What next:
+          Install and configure stuff that is inconvenient to setup with ansible.
+
+          - Rust. See: https://www.rust-lang.org/tools/install
