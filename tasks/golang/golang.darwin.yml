@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Brew hint
+  ansible.builtin.debug:
+    msg: Install go with brew

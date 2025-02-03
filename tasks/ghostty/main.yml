@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Install ghost tty based on system
+  ansible.builtin.include_tasks:
+    file: ghostty.{{ ansible_os_family | lower }}.yml

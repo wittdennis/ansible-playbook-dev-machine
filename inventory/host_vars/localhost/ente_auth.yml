@@ -1,0 +1,2 @@
+---
+ente_auth_appimage_version: v4.3.2 # renovate: datasource=github-releases depName=ente-io/ente versioning=semver extractVersion=^auth-(?<version>.*)$

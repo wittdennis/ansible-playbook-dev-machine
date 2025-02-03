@@ -1,0 +1,41 @@
+# code: language=ansible
+---
+- name: Check if yadm repo is present.
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.local/share/yadm/repo.git"
+  register: yadm_repo_path
+
+- name: Clone dotiles repo
+  when: not yadm_repo_path.stat.exists
+  ansible.builtin.shell:
+    executable: /bin/bash
+    cmd: |
+      #!/bin/bash
+
+      PLATFORM="undefined"
+      case "$OSTYPE" in
+      solaris*) PLATFORM=solaris ;;
+      darwin*) PLATFORM=osx ;;
+      linux*) PLATFORM=linux ;;
+      bsd*) PLATFORM=bsd ;;
+      msys*) PLATFORM=windows ;;
+      cygwin*) PLATFORM=windows ;;
+      *) PLATFORM=undefined ;;
+      esac
+
+      BASEPATH=/usr/local/bin
+      if [ $PLATFORM = 'osx' ]; then
+        BASEPATH=/opt/homebrew/bin
+      elif [ $PLATFORM = 'linux' ]; then
+        BASEPATH=/home/linuxbrew/.linuxbrew/bin
+      else
+        BASEPATH=/usr/local/bin
+      fi
+
+      $BASEPATH/yadm clone --recurse-submodules --bootstrap {{ yadm_dotfiles_repo_http }}
+      $BASEPATH/yadm checkout {{ ansible_user_dir }}
+
+      $BASEPATH/yadm remote set-url origin {{ yadm_dotfiles_repo_ssh }}
+    chdir: "{{ ansible_user_dir }}"
+  register: yadm_clone
+  changed_when: yadm_clone.rc == 0

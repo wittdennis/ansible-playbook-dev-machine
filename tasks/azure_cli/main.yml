@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Install azure-cli based on system
+  ansible.builtin.include_tasks:
+    file: azure_cli.{{ ansible_os_family | lower }}.yml

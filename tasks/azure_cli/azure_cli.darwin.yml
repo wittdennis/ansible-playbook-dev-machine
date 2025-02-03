@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Print install hint
+  ansible.builtin.debug:
+    msg: "To install azure-cli add it as a homebrew package for mac"

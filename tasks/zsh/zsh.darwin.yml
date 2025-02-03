@@ -1,0 +1,13 @@
+# code: language=ansible
+---
+- name: Install zsh
+  ansible.builtin.package:
+    name:
+      - zsh
+    state: present
+
+- name: Set zsh as default shell
+  changed_when: change_shell_cmd.rc == 0
+  ansible.builtin.command:
+    cmd: chsh -s /bin/zsh
+  register: change_shell_cmd

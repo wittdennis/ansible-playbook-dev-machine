@@ -1,0 +1,8 @@
+name: lint
+
+on:
+  push:
+
+jobs:
+  ansible-lint:
+    uses: wittdennis/.github/.github/workflows/ansible-lint.yaml@master

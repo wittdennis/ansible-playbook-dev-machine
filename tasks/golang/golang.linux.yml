@@ -1,0 +1,46 @@
+# code: language=ansible
+---
+- name: Check current go version
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command:
+    cmd: /usr/local/go/bin/go version
+  register: current_go_version
+
+- name: Set if go version should be updated
+  ansible.builtin.set_fact:
+    golang_update: "{{ not golang_version in current_go_version.stdout }}"
+
+- name: Should go be updated?
+  ansible.builtin.debug:
+    var: golang_update
+    verbosity: 1
+
+- name: Remove currently installed go installation
+  when: golang_update
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: absent
+
+- name: Download go
+  when: golang_update
+  ansible.builtin.get_url:
+    url: https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz
+    dest: /tmp/go{{ golang_version }}.linux-amd64.tar.gz
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    force: true
+    mode: u+rwx,g+r,o+r
+
+- name: Extract go package
+  when: golang_update
+  become: true
+  ansible.builtin.unarchive:
+    src: /tmp/go{{ golang_version }}.linux-amd64.tar.gz
+    dest: /usr/local
+
+- name: Remove go archive
+  ansible.builtin.file:
+    path: /tmp/go{{ golang_version }}.linux-amd64.tar.gz
+    state: absent

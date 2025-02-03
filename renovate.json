@@ -1,6 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>wittdennis/renovate-config"
+  "extends": ["local>wittdennis/renovate-config"],
+  "packageRules": [
+    {
+      "matchDepNames": ["Homebrew/brew"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
   ]
 }

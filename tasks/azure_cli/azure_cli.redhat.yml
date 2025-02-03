@@ -1,0 +1,39 @@
+# code: language=ansible
+---
+- name: Set variables
+  ansible.builtin.set_fact:
+    rpm_package_name: packages-microsoft-prod.rpm
+
+- name: Import rpm key
+  become: true
+  ansible.builtin.rpm_key:
+    key: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: Download rpm repo
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/config/rhel/9.0/{{ rpm_package_name }}
+    dest: /tmp/{{ rpm_package_name }}
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    force: true
+    mode: u+rwx,g+r,o+r
+
+- name: Install rpm repo
+  become: true
+  ansible.builtin.dnf:
+    name: /tmp/{{ rpm_package_name }}
+    state: present
+
+- name: Install azure-cli
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - azure-cli
+    state: present
+    update_cache: true
+
+- name: Remove rpm repo file
+  ansible.builtin.file:
+    path: /tmp/{{ rpm_package_name }}
+    state: absent
