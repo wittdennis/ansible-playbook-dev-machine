@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Install openvpn client depending on system
+  ansible.builtin.include_tasks:
+    file: "openvpn.{{ ansible_system | lower }}.yml"

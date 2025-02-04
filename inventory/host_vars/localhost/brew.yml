@@ -42,6 +42,7 @@ homebrew_mac_casks:
   - stats
   - termius
   - slack
+  - tunnelblick
 
 homebrew_linux_packages:
   - yadm

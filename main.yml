@@ -59,12 +59,18 @@
       ansible.builtin.import_tasks:
         file: tasks/pipx_packages/main.yml
 
+    - name: Install pipx plugins
+      tags: [openvpn]
+      ansible.builtin.import_tasks:
+        file: tasks/openvpn/main.yml
+
     - name: Setup dotfiles
       tags: [dotfiles]
       ansible.builtin.import_tasks:
         file: tasks/yadm/main.yml
 
   post_tasks:
+    # yamllint disable rule:line-length
     - name: Print finish message
       ansible.builtin.debug:
         msg: |
@@ -74,3 +80,8 @@
           Install and configure stuff that is inconvenient to setup with ansible.
 
           - Rust. See: https://www.rust-lang.org/tools/install
+          - VPNs.
+              Wireguard:
+                See Mac client: https://apps.apple.com/us/app/wireguard/id1451685025?ls=1&mt=12
+                See linux: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/assembly_setting-up-a-wireguard-vpn_configuring-and-managing-networking#proc_configuring-a-wireguard-by-using-nmcli_assembly_setting-up-a-wireguard-vpn
+    # yamllint enable rule:line-length
