@@ -1,0 +1,14 @@
+# code: language=ansible
+---
+- name: Activate copr repo for openvpn
+  become: true
+  changed_when: copr_activate_openvpn.rc == 0
+  ansible.builtin.command:
+    cmd: dnf copr enable dsommers/openvpn3 -y
+  register: copr_activate_openvpn
+
+- name: Instal openvpn client
+  become: true
+  ansible.builtin.dnf:
+    name: openvpn3-client
+    state: present
