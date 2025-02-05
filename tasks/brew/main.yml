@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 - name: Install brew based on system
   ansible.builtin.include_tasks:
