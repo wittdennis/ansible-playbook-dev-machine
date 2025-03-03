@@ -1,6 +1,6 @@
 ---
 homebrew_repo: https://github.com/Homebrew/brew
-homebrew_version: "4.4.22" # renovate: datasource=github-releases depName=Homebrew/brew versioning=semver
+homebrew_version: "4.4.23" # renovate: datasource=github-releases depName=Homebrew/brew versioning=semver
 
 homebrew_mac_packages:
   - yadm
