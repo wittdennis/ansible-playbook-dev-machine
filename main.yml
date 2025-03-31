@@ -8,6 +8,15 @@
         var: ansible_facts
         verbosity: 3
 
+    - name: Create directories in home dir
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+      loop: "{{ home_directories }}"
+
     - name: Setup zsh terminal
       tags: [terminal]
       ansible.builtin.import_tasks:
@@ -58,11 +67,6 @@
       tags: [pipx_packages]
       ansible.builtin.import_tasks:
         file: tasks/pipx_packages/main.yml
-
-    - name: Install pipx plugins
-      tags: [openvpn]
-      ansible.builtin.import_tasks:
-        file: tasks/openvpn/main.yml
 
     - name: Setup dotfiles
       tags: [dotfiles]

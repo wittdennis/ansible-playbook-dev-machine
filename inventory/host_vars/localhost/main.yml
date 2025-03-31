@@ -1,1 +1,3 @@
 ---
+home_directories:
+  - "{{ ansible_user_dir }}/.nvm"

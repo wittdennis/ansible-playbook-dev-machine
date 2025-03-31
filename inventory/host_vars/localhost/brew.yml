@@ -63,4 +63,5 @@ homebrew_linux_packages:
   - terraform-docs
   - tflint
   - yq
+  - nvm
 homebrew_linux_casks: []
