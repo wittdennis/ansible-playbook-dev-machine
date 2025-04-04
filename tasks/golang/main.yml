@@ -2,14 +2,14 @@
 ---
 - name: Install golang based on system
   ansible.builtin.include_tasks:
-    file: golang.{{ ansible_system | lower }}.yml
+    file: golang.{{ ansible_os_family | lower }}.yml
 
 - name: Setup go directories
   ansible.builtin.file:
     path: "{{ item }}"
     mode: "0770"
     owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    group: "staff"
     state: directory
   loop:
     - "{{ ansible_user_dir }}/.go"

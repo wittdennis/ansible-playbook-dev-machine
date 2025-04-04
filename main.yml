@@ -14,7 +14,7 @@
         state: directory
         mode: "0755"
         owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        group: "staff"
       loop: "{{ home_directories }}"
 
     - name: Setup zsh terminal
@@ -49,7 +49,7 @@
 
     - name: Install packages on linux
       tags: [linux_packages]
-      when: (ansible_system | lower) == 'linux'
+      when: (ansible_os_family | lower) == 'linux'
       ansible.builtin.import_tasks:
         file: tasks/linux_packages/main.yml
 

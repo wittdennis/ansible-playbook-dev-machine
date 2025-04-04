@@ -1,14 +1,14 @@
 # code: language=ansible
 ---
 - name: Install pipx packages (Mac)
-  when: (ansible_system | lower) == 'darwin'
+  when: (ansible_os_family | lower) == 'darwin'
   community.general.pipx:
     name: "{{ item }}"
     state: latest
   loop: "{{ pipx_packages_mac }}"
 
 - name: Install pipx packages (Linux)
-  when: (ansible_system | lower) == 'linux'
+  when: (ansible_os_family | lower) == 'linux'
   community.general.pipx:
     name: "{{ item }}"
     state: latest

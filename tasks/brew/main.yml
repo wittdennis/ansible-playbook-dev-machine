@@ -2,12 +2,12 @@
 ---
 - name: Install brew based on system
   ansible.builtin.include_tasks:
-    file: brew.{{ ansible_system | lower }}.yml
+    file: brew.{{ ansible_os_family | lower }}.yml
 
 - name: Determine packages for platform
   ansible.builtin.set_fact:
-    homebrew_packages: "{{ homebrew_linux_packages if (ansible_system | lower) == 'linux' else homebrew_mac_packages }}"
-    homebrew_casks: "{{ homebrew_linux_casks if (ansible_system | lower) == 'linux' else homebrew_mac_casks }}"
+    homebrew_packages: "{{ homebrew_linux_packages if (ansible_os_family | lower) == 'linux' else homebrew_mac_packages }}"
+    homebrew_casks: "{{ homebrew_linux_casks if (ansible_os_family | lower) == 'linux' else homebrew_mac_casks }}"
 
 - name: Install brew packages
   when: homebrew_packages is defined and homebrew_packages | length > 0

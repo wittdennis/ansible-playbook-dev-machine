@@ -43,6 +43,10 @@ homebrew_mac_casks:
   - termius
   - slack
   - tunnelblick
+  - proton-mail
+  - proton-pass
+  - spotify
+  - webex
 
 homebrew_linux_packages:
   - yadm
