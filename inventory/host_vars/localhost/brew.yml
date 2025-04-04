@@ -47,6 +47,7 @@ homebrew_mac_casks:
   - proton-pass
   - spotify
   - webex
+  - microsoft-outlook
 
 homebrew_linux_packages:
   - yadm
