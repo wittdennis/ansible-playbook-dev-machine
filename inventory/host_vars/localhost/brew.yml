@@ -49,6 +49,7 @@ homebrew_mac_casks:
   - webex
   - microsoft-outlook
   - scroll-reverser
+  - microsoft-teams
 
 homebrew_linux_packages:
   - yadm
