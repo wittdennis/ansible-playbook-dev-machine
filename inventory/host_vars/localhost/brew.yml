@@ -71,4 +71,5 @@ homebrew_linux_packages:
   - tflint
   - yq
   - nvm
+  - elgato-stream-deck
 homebrew_linux_casks: []
