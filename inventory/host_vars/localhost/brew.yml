@@ -48,6 +48,7 @@ homebrew_mac_casks:
   - spotify
   - webex
   - microsoft-outlook
+  - scroll-reverser
 
 homebrew_linux_packages:
   - yadm
