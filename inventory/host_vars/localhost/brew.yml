@@ -30,6 +30,7 @@ homebrew_mac_packages:
   - terraform-docs
   - tflint
   - yq
+  - golangci-lint
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
