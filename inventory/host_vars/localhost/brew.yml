@@ -31,6 +31,7 @@ homebrew_mac_packages:
   - tflint
   - yq
   - golangci-lint
+  - pre-commit
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
@@ -51,6 +52,7 @@ homebrew_mac_casks:
   - microsoft-outlook
   - scroll-reverser
   - microsoft-teams
+  - elgato-stream-deck
 
 homebrew_linux_packages:
   - yadm
@@ -72,5 +74,4 @@ homebrew_linux_packages:
   - tflint
   - yq
   - nvm
-  - elgato-stream-deck
 homebrew_linux_casks: []
