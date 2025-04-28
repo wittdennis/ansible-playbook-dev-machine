@@ -11,13 +11,15 @@ cygwin*) PLATFORM=windows ;;
 *) PLATFORM=undefined ;;
 esac
 
-BASEPATH=/usr/local/bin
+BASEPATH=/usr/bin
 if [ $PLATFORM = 'osx' ]; then
     BASEPATH=/opt/homebrew/bin
 elif [ $PLATFORM = 'linux' ]; then
-    BASEPATH=/home/linuxbrew/.linuxbrew/bin
+    if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
+        BASEPATH=/home/linuxbrew/.linuxbrew/bin
+    fi
 else
-    BASEPATH=/usr/local/bin
+    BASEPATH=/usr/bin
 fi
 
 ${BASEPATH}/ansible-galaxy install -r requirements.yml
