@@ -9,7 +9,7 @@
     path: "{{ item }}"
     mode: "0770"
     owner: "{{ ansible_user_id }}"
-    group: "staff"
+    group: "{{ user_group_id }}"
     state: directory
   loop:
     - "{{ ansible_user_dir }}/.go"

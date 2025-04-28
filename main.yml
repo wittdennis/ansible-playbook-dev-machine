@@ -8,13 +8,23 @@
         var: ansible_facts
         verbosity: 3
 
+    - name: Set group id linux
+      when: (ansible_os_family | lower) is 'linux'
+      ansible.builtin.set_fact:
+        user_group_id: "{{ ansible_user_id }}"
+
+    - name: Set group id macos
+      when: (ansible_os_family | lower) is 'darwin'
+      ansible.builtin.set_fact:
+        user_group_id: staff
+
     - name: Create directories in home dir
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
         mode: "0755"
         owner: "{{ ansible_user_id }}"
-        group: "staff"
+        group: "{{ user_group_id }}"
       loop: "{{ home_directories }}"
 
     - name: Setup zsh terminal
