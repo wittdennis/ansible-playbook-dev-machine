@@ -8,7 +8,7 @@
   loop: "{{ pipx_packages_mac }}"
 
 - name: Install pipx packages (Linux)
-  when: (ansible_os_family | lower) == 'linux'
+  when: (ansible_os_family | lower) == 'redhat'
   community.general.pipx:
     name: "{{ item }}"
     state: latest

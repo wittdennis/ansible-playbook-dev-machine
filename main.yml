@@ -9,7 +9,7 @@
         verbosity: 3
 
     - name: Set group id linux
-      when: (ansible_os_family | lower) == 'linux'
+      when: (ansible_os_family | lower) == 'redhat'
       ansible.builtin.set_fact:
         user_group_id: "{{ ansible_user_id }}"
 
@@ -59,7 +59,7 @@
 
     - name: Install packages on linux
       tags: [linux_packages]
-      when: (ansible_os_family | lower) == 'linux'
+      when: (ansible_os_family | lower) == 'redhat'
       ansible.builtin.import_tasks:
         file: tasks/linux_packages/main.yml
 

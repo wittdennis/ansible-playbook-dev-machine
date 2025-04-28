@@ -6,8 +6,8 @@
 
 - name: Determine packages for platform
   ansible.builtin.set_fact:
-    homebrew_packages: "{{ homebrew_linux_packages if (ansible_os_family | lower) == 'linux' else homebrew_mac_packages }}"
-    homebrew_casks: "{{ homebrew_linux_casks if (ansible_os_family | lower) == 'linux' else homebrew_mac_casks }}"
+    homebrew_packages: "{{ homebrew_linux_packages if (ansible_os_family | lower) == 'redhat' else homebrew_mac_packages }}"
+    homebrew_casks: "{{ homebrew_linux_casks if (ansible_os_family | lower) == 'redhat' else homebrew_mac_casks }}"
 
 - name: Install brew packages
   when: homebrew_packages is defined and homebrew_packages | length > 0
