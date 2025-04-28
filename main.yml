@@ -9,12 +9,12 @@
         verbosity: 3
 
     - name: Set group id linux
-      when: (ansible_os_family | lower) is 'linux'
+      when: (ansible_os_family | lower) == 'linux'
       ansible.builtin.set_fact:
         user_group_id: "{{ ansible_user_id }}"
 
     - name: Set group id macos
-      when: (ansible_os_family | lower) is 'darwin'
+      when: (ansible_os_family | lower) == 'darwin'
       ansible.builtin.set_fact:
         user_group_id: staff
 
