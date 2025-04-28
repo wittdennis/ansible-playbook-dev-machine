@@ -15,7 +15,7 @@ BASEPATH=/usr/bin
 if [ $PLATFORM = 'osx' ]; then
     BASEPATH=/opt/homebrew/bin
 elif [ $PLATFORM = 'linux' ]; then
-    if [ -d "/home/linuxbrew/.linuxbrew/bin/ansible-galaxy" ]; then
+    if [ -f "/home/linuxbrew/.linuxbrew/bin/ansible-galaxy" ]; then
         BASEPATH=/home/linuxbrew/.linuxbrew/bin
     fi
 else

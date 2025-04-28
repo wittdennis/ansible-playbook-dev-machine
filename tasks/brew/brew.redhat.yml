@@ -116,6 +116,6 @@
       - procps-ng
       - curl
       - file
-      - "@Development Tools"
+      - "@development-tools"
     state: present
     update_cache: true
