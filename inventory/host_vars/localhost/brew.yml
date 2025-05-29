@@ -32,6 +32,7 @@ homebrew_mac_packages:
   - yq
   - golangci-lint
   - pre-commit
+  - tofuenv
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
@@ -74,4 +75,5 @@ homebrew_linux_packages:
   - tflint
   - yq
   - nvm
+  - tofuenv
 homebrew_linux_casks: []
