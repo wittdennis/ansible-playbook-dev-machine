@@ -34,6 +34,7 @@ homebrew_mac_packages:
   - pre-commit
   - tofuenv
   - operator-sdk
+  - mas
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
