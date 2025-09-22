@@ -35,6 +35,7 @@ homebrew_mac_packages:
   - tofuenv
   - operator-sdk
   - mas
+  - awscli
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
@@ -79,4 +80,5 @@ homebrew_linux_packages:
   - nvm
   - tofuenv
   - operator-sdk
+  - awscli
 homebrew_linux_casks: []
