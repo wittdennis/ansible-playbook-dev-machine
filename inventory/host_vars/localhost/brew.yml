@@ -36,6 +36,7 @@ homebrew_mac_packages:
   - operator-sdk
   - mas
   - awscli
+  - fio
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
