@@ -58,6 +58,7 @@ homebrew_mac_casks:
   - scroll-reverser
   - microsoft-teams
   - elgato-stream-deck
+  - cyberduck
 
 homebrew_linux_packages:
   - yadm
