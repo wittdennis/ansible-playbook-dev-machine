@@ -37,6 +37,8 @@ homebrew_mac_packages:
   - mas
   - awscli
   - fio
+  - cncf/landscape2/landscape2
+  - siderolabs/tap/talosctl
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
@@ -83,4 +85,6 @@ homebrew_linux_packages:
   - tofuenv
   - operator-sdk
   - awscli
+  - cncf/landscape2/landscape2
+  - siderolabs/tap/talosctl
 homebrew_linux_casks: []
