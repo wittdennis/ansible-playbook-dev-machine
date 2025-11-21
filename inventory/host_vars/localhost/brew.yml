@@ -39,6 +39,7 @@ homebrew_mac_packages:
   - fio
   - cncf/landscape2/landscape2
   - siderolabs/tap/talosctl
+  - session-manager-plugin
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
@@ -87,4 +88,5 @@ homebrew_linux_packages:
   - awscli
   - cncf/landscape2/landscape2
   - siderolabs/tap/talosctl
+  - session-manager-plugin
 homebrew_linux_casks: []
