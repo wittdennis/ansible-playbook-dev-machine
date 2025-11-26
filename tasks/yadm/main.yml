@@ -2,7 +2,7 @@
 ---
 - name: Check if yadm repo is present.
   ansible.builtin.stat:
-    path: "{{ ansible_user_dir }}/.local/share/yadm/repo.git"
+    path: "{{ ansible_facts['user_dir'] }}/.local/share/yadm/repo.git"
   register: yadm_repo_path
 
 - name: Clone dotiles repo
@@ -17,6 +17,7 @@
       solaris*) PLATFORM=solaris ;;
       darwin*) PLATFORM=osx ;;
       linux*) PLATFORM=linux ;;
+      linux-gnu*) PLATFORM=linux ;;
       bsd*) PLATFORM=bsd ;;
       msys*) PLATFORM=windows ;;
       cygwin*) PLATFORM=windows ;;
@@ -33,9 +34,9 @@
       fi
 
       $BASEPATH/yadm clone --recurse-submodules --bootstrap {{ yadm_dotfiles_repo_http }}
-      $BASEPATH/yadm checkout {{ ansible_user_dir }}
+      $BASEPATH/yadm checkout {{ ansible_facts['user_dir'] }}
 
       $BASEPATH/yadm remote set-url origin {{ yadm_dotfiles_repo_ssh }}
-    chdir: "{{ ansible_user_dir }}"
+    chdir: "{{ ansible_facts['user_dir'] }}"
   register: yadm_clone
   changed_when: yadm_clone.rc == 0

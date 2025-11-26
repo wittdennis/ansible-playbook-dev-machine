@@ -11,8 +11,8 @@
 
 - name: Determine Homebrew ownership variables
   ansible.builtin.set_fact:
-    homebrew_user: "{{ homebrew_user | default(ansible_user_id) }}"
-    homebrew_group: "{{ homebrew_group | default(ansible_user_gid) }}"
+    homebrew_user: "{{ homebrew_user | default(ansible_facts['user_id']) }}"
+    homebrew_group: "{{ homebrew_group | default(user_group_id) }}"
 
 - name: Create prefix directory
   become: true
@@ -84,8 +84,8 @@
     - "{{ homebrew_linux_prefix }}/lib"
     - "{{ homebrew_linux_prefix }}/sbin"
     - "{{ homebrew_linux_prefix }}/share"
-    - "{{ homebrew_linux_prefix }}/share/{{ ansible_user_shell.split('/')[-1] }}"
-    - "{{ homebrew_linux_prefix }}/share/{{ ansible_user_shell.split('/')[-1] }}/site-functions"
+    - "{{ homebrew_linux_prefix }}/share/{{ ansible_facts['user_shell'].split('/')[-1] }}"
+    - "{{ homebrew_linux_prefix }}/share/{{ ansible_facts['user_shell'].split('/')[-1] }}/site-functions"
     - "{{ homebrew_linux_prefix }}/var"
     - "{{ homebrew_linux_prefix }}/opt"
     - "{{ homebrew_linux_prefix }}/var/homebrew"
@@ -108,8 +108,8 @@
   when: not homebrew_binary.stat.exists
   become: true
 
-- name: Install brew dependencies
-  when: ansible_os_family == "RedHat"
+- name: Install brew dependencies (RedHat)
+  when: ansible_facts["os_family"] == "RedHat"
   become: true
   ansible.builtin.dnf:
     name:
@@ -117,5 +117,16 @@
       - curl
       - file
       - "@development-tools"
+    state: present
+    update_cache: true
+
+- name: Install brew dependencies (Archlinux)
+  when: ansible_facts["os_family"] == "Archlinux"
+  become: true
+  community.general.pacman:
+    name:
+      - procps-ng
+      - curl
+      - file
     state: present
     update_cache: true

@@ -28,8 +28,8 @@
   ansible.builtin.get_url:
     url: https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz
     dest: /tmp/go{{ golang_version }}.linux-amd64.tar.gz
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    owner: "{{ ansible_facts['user_id'] }}"
+    group: "{{ ansible_facts['user_id'] }}"
     force: true
     mode: u+rwx,g+r,o+r
 

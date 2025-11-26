@@ -1,14 +1,45 @@
 # code: language=ansible
 ---
+- name: Install pipx (arch)
+  when: (ansible_facts['os_family'] | lower) == 'archlinux'
+  become: true
+  community.general.pacman:
+    name:
+      - python-pipx
+    state: present
+    update_cache: true
+
+- name: Install pipx (linux other)
+  when: (ansible_facts['os_family'] | lower) == 'redhat'
+  become: true
+  community.general.pacman:
+    name:
+      - pipx
+    state: present
+    update_cache: true
+
+- name: Pipx ensurepath
+  changed_when: pipx_ensurepath.rc == 0
+  register: pipx_ensurepath
+  ansible.builtin.command:
+    cmd: pipx ensurepath
+
+- name: Pipx ensurepath global
+  changed_when: pipx_ensurepath_global.rc == 0
+  register: pipx_ensurepath_global
+  become: true
+  ansible.builtin.command:
+    cmd: pipx ensurepath --global
+
 - name: Install pipx packages (Mac)
-  when: (ansible_os_family | lower) == 'darwin'
+  when: (ansible_facts['system'] | lower) == 'darwin'
   community.general.pipx:
     name: "{{ item }}"
     state: latest
   loop: "{{ pipx_packages_mac }}"
 
 - name: Install pipx packages (Linux)
-  when: (ansible_os_family | lower) == 'redhat'
+  when: (ansible_facts['system'] | lower) == 'linux'
   community.general.pipx:
     name: "{{ item }}"
     state: latest

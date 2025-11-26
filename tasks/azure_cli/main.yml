@@ -2,4 +2,4 @@
 ---
 - name: Install azure-cli based on system
   ansible.builtin.include_tasks:
-    file: azure_cli.{{ ansible_os_family | lower }}.yml
+    file: azure_cli.{{ ansible_facts["os_family"] | lower }}.yml

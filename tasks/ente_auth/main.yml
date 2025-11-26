@@ -1,5 +1,5 @@
 # code: language=ansible
 ---
-- name: Install ghost tty based on system
+- name: Install ente-auth based on system
   ansible.builtin.include_tasks:
-    file: ente_auth.{{ ansible_os_family | lower }}.yml
+    file: ente_auth.{{ ansible_facts["system"] | lower }}.yml

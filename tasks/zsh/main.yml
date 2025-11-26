@@ -2,4 +2,4 @@
 ---
 - name: Setup zsh based on system
   ansible.builtin.include_tasks:
-    file: zsh.{{ ansible_os_family | lower }}.yml
+    file: zsh.{{ ansible_facts["system"] | lower }}.yml

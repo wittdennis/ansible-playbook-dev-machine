@@ -9,21 +9,21 @@
         verbosity: 3
 
     - name: Set group id linux
-      when: (ansible_os_family | lower) == 'redhat'
+      when: (ansible_facts["system"] | lower) == 'linux'
       ansible.builtin.set_fact:
-        user_group_id: "{{ ansible_user_id }}"
+        user_group_id: '{{ ansible_facts["user_id"] }}'
 
     - name: Set group id macos
-      when: (ansible_os_family | lower) == 'darwin'
+      when: (ansible_facts["system"] | lower) == 'darwin'
       ansible.builtin.set_fact:
         user_group_id: staff
 
     - name: Create directories in home dir
       ansible.builtin.file:
-        path: "{{ item }}"
+        path: "{{ ansible_facts['user_dir'] }}/{{ item }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
+        owner: '{{ ansible_facts["user_id"] }}'
         group: "{{ user_group_id }}"
       loop: "{{ home_directories }}"
 
@@ -31,6 +31,12 @@
       tags: [terminal]
       ansible.builtin.import_tasks:
         file: tasks/zsh/main.yml
+
+    - name: Install packages on linux
+      tags: [linux_packages]
+      when: (ansible_facts["system"] | lower) == 'linux'
+      ansible.builtin.import_tasks:
+        file: tasks/linux_packages/main.yml
 
     - name: Install brew
       tags: [brew]
@@ -56,12 +62,6 @@
       tags: [ente_auth]
       ansible.builtin.import_tasks:
         file: tasks/ente_auth/main.yml
-
-    - name: Install packages on linux
-      tags: [linux_packages]
-      when: (ansible_os_family | lower) == 'redhat'
-      ansible.builtin.import_tasks:
-        file: tasks/linux_packages/main.yml
 
     - name: Install golang
       tags: [golang]

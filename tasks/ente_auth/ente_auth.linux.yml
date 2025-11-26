@@ -2,7 +2,6 @@
 ---
 - name: Set download url
   ansible.builtin.set_fact:
-    test: https://github.com/ente-io/ente/releases/download/auth-v4.3.2/ente-auth-v4.3.2-x86_64.AppImage
     ente_auth_appimage_download_url: "https://github.com/ente-io/ente/releases/download/auth-{{ ente_auth_appimage_version }}/ente-auth-{{ ente_auth_appimage_version }}-x86_64.AppImage"
 
 - name: Download ente-auth AppImage
@@ -27,21 +26,21 @@
 
 - name: Ensure icons directory exists
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.icons"
+    path: "{{ ansible_facts['user_dir'] }}/.icons"
     state: directory
     mode: "0755"
 
 - name: Copy ente-auth icon
   ansible.builtin.copy:
     src: files/ente-auth-icon.png
-    dest: "{{ ansible_user_dir }}/.icons/ente-auth-icon.png"
+    dest: "{{ ansible_facts['user_dir'] }}/.icons/ente-auth-icon.png"
     force: true
     mode: "0644"
 
 - name: Install desktop file
   changed_when: install_desktop_file.rc == 0
   ansible.builtin.command:
-    cmd: "desktop-file-install --dir={{ ansible_user_dir }}/.local/share/applications /tmp/ente-auth.desktop"
+    cmd: "desktop-file-install --dir={{ ansible_facts['user_dir'] }}/.local/share/applications /tmp/ente-auth.desktop"
   register: install_desktop_file
 
 - name: Remove downloaded AppImage

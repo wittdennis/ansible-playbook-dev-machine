@@ -2,12 +2,18 @@
 ---
 - name: Install brew based on system
   ansible.builtin.include_tasks:
-    file: brew.{{ ansible_os_family | lower }}.yml
+    file: brew.{{ ansible_facts["system"] | lower }}.yml
 
 - name: Determine packages for platform
   ansible.builtin.set_fact:
-    homebrew_packages: "{{ homebrew_linux_packages if (ansible_os_family | lower) == 'redhat' else homebrew_mac_packages }}"
-    homebrew_casks: "{{ homebrew_linux_casks if (ansible_os_family | lower) == 'redhat' else homebrew_mac_casks }}"
+    homebrew_packages: "{{ homebrew_linux_packages if (ansible_facts['system'] | lower) == 'linux' else homebrew_mac_packages }}"
+    homebrew_casks: "{{ homebrew_linux_casks if (ansible_facts['system'] | lower) == 'linux' else homebrew_mac_casks }}"
+    homebrew_taps: "{{ homebrew_linux_taps if (ansible_facts['system'] | lower) == 'linux' else homebrew_mac_taps }}"
+
+- name: Setup homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ homebrew_taps }}"
+    state: present
 
 - name: Install brew packages
   when: homebrew_packages is defined and homebrew_packages | length > 0

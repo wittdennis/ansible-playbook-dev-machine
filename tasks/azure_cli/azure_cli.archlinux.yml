@@ -1,0 +1,9 @@
+# code: language=ansible
+---
+- name: Install azure-cli
+  become: true
+  community.general.pacman:
+    name:
+      - azure-cli
+    state: present
+    update_cache: true
