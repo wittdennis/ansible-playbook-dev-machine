@@ -11,5 +11,5 @@
   become: true
   changed_when: change_shell_cmd.rc == 0
   ansible.builtin.command:
-    cmd: chsh -s /bin/zsh "{{ ansible_user_id }}"
+    cmd: chsh -s /bin/zsh "{{ ansible_facts["user_id"] }}"
   register: change_shell_cmd

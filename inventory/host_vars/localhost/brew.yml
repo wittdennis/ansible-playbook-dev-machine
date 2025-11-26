@@ -2,6 +2,9 @@
 homebrew_repo: https://github.com/Homebrew/brew
 homebrew_version: "5.0.3" # renovate: datasource=github-releases depName=Homebrew/brew versioning=semver
 
+homebrew_mac_taps:
+  - cncf/landscape2
+  - siderolabs/tap
 homebrew_mac_packages:
   - yadm
   - kubectl
@@ -63,6 +66,9 @@ homebrew_mac_casks:
   - elgato-stream-deck
   - cyberduck
 
+homebrew_linux_taps:
+  - cncf/landscape2
+  - siderolabs/tap
 homebrew_linux_packages:
   - yadm
   - kubectl
@@ -88,5 +94,4 @@ homebrew_linux_packages:
   - awscli
   - cncf/landscape2/landscape2
   - siderolabs/tap/talosctl
-  - session-manager-plugin
 homebrew_linux_casks: []

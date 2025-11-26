@@ -2,4 +2,4 @@
 ---
 - name: Install vscode based on system
   ansible.builtin.include_tasks:
-    file: vscode.{{ ansible_os_family | lower }}.yml
+    file: vscode.{{ ansible_facts["os_family"] | lower }}.yml

@@ -1,12 +1,12 @@
 # code: language=ansible
 ---
 - name: Set krew bin path (linux)
-  when: (ansible_os_family | lower) == 'redhat'
+  when: (ansible_facts['system'] | lower) == 'linux'
   ansible.builtin.set_fact:
     krew_bin: /home/linuxbrew/.linuxbrew/bin/kubectl-krew
 
 - name: Set krew bin path (mac)
-  when: (ansible_os_family | lower) == 'darwin'
+  when: (ansible_facts['system'] | lower) == 'darwin'
   ansible.builtin.set_fact:
     krew_bin: /opt/homebrew/bin/kubectl-krew
 
