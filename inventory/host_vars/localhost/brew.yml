@@ -43,6 +43,7 @@ homebrew_mac_packages:
   - cncf/landscape2/landscape2
   - siderolabs/tap/talosctl
   - session-manager-plugin
+  - trivy
 homebrew_mac_casks:
   - visual-studio-code
   - ghostty
@@ -94,4 +95,5 @@ homebrew_linux_packages:
   - awscli
   - cncf/landscape2/landscape2
   - siderolabs/tap/talosctl
+  - trivy
 homebrew_linux_casks: []
