@@ -1,2 +1,2 @@
 ---
-golang_version: "1.25.5" # renovate: datasource=github-tags depName=golang/go extractVersion=^go(?<version>.*)$ versioning=semver
+golang_version: "1.25.6" # renovate: datasource=github-tags depName=golang/go extractVersion=^go(?<version>.*)$ versioning=semver
