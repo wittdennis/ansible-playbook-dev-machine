@@ -45,7 +45,7 @@ homebrew_mac_packages:
   - session-manager-plugin
   - trivy
 homebrew_mac_casks:
-  - visual-studio-code
+  - vscodium
   - ghostty
   - dotnet-sdk
   - firefox
