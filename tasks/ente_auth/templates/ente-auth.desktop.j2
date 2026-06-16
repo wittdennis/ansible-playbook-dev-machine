@@ -7,16 +7,16 @@ Type=Application
 Version=1.0
 
 # The name of the application
-Name=ente-auth
+Name=Ente Auth
 
 # A comment which can/will be used as a tooltip
 Comment=Open source 2FA authenticator, with end-to-end encrypted backups.
 
 # The path to the folder in which the executable is run
-Path=/usr/local/bin
+Path={{ ansible_facts['user_dir'] }}/.local/bin
 
 # The executable of the application, possibly with arguments.
-Exec=ente-auth
+Exec=EnteAuth.AppImage
 
 # The name of the icon that will be used to display this entry
 Icon=ente-auth-icon
