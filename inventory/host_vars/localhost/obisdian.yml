@@ -1,2 +1,2 @@
 ---
-obsidian_version: 1.12.7 # renovate: datasource=github-releases depName=obsidianmd/obsidian-releases versioning=semver
+obsidian_version: "1.12.7" # renovate: datasource=github-releases depName=obsidianmd/obsidian-releases versioning=semver
