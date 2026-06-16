@@ -5,3 +5,4 @@ linux_packages:
   - podman
   - wireguard-tools
   - gcc
+  - fuse2

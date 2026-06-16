@@ -58,6 +58,11 @@
       ansible.builtin.import_tasks:
         file: tasks/ghostty/main.yml
 
+    - name: Setup Obsidian
+      tags: [obsidian]
+      ansible.builtin.import_tasks:
+        file: tasks/obsidian/main.yml
+
     - name: Setup ente-auth
       tags: [ente_auth]
       ansible.builtin.import_tasks:

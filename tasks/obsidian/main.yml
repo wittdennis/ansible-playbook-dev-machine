@@ -1,0 +1,5 @@
+# code: language=ansible
+---
+- name: Install ente-auth based on system
+  ansible.builtin.include_tasks:
+    file: obsidian.{{ ansible_facts["system"] | lower }}.yml

@@ -1,0 +1,60 @@
+# code: language=ansible
+---
+- name: Set download url
+  ansible.builtin.set_fact:
+    obsidian_appimage_download_url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ obsidian_version }}/Obsidian-{{ obsidian_version }}.AppImage"
+
+- name: Download Obsidian AppImage
+  ansible.builtin.get_url:
+    url: "{{ obsidian_appimage_download_url }}"
+    dest: /tmp/Obsidian.AppImage
+    mode: "0755"
+    force: true
+
+- name: Install Obsidian
+  changed_when: install_obsidian.rc == 0
+  ansible.builtin.command:
+    cmd: "install /tmp/Obsidian.AppImage {{ ansible_facts['user_dir'] }}/.local/bin/Obsidian.AppImage"
+  register: install_obsidian
+
+- name: Template .desktop file
+  ansible.builtin.template:
+    src: templates/Obsidian.desktop.j2
+    dest: "/tmp/Obsidian.desktop"
+    mode: "0644"
+
+- name: Ensure icons directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/scalable/apps"
+    state: directory
+    mode: "0755"
+
+- name: Copy Obsidian icon
+  ansible.builtin.copy:
+    src: files/obsidian-icon.svg
+    dest: "{{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/scalable/apps/obsidian-icon.svg"
+    force: true
+    mode: "0644"
+
+- name: Ensure index.theme
+  ansible.builtin.copy:
+    content: "{{ icon_index_theme_file }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/index.theme"
+    mode: "0644"
+
+- name: Update gtk icon cache
+  changed_when: update_icon_cache.rc == 0
+  ansible.builtin.command:
+    cmd: "gtk-update-icon-cache {{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor"
+  register: update_icon_cache
+
+- name: Install desktop file
+  changed_when: install_desktop_file.rc == 0
+  ansible.builtin.command:
+    cmd: "desktop-file-install --dir={{ ansible_facts['user_dir'] }}/.local/share/applications /tmp/Obsidian.desktop"
+  register: install_desktop_file
+
+- name: Remove downloaded AppImage
+  ansible.builtin.file:
+    path: /tmp/Obsidian.AppImage
+    state: absent
