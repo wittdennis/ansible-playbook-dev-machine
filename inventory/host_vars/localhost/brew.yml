@@ -44,6 +44,7 @@ homebrew_mac_packages:
   - siderolabs/tap/talosctl
   - session-manager-plugin
   - trivy
+  - just
 homebrew_mac_casks:
   - vscodium
   - ghostty
@@ -95,5 +96,6 @@ homebrew_linux_packages:
   - cncf/landscape2/landscape2
   - siderolabs/tap/talosctl
   - trivy
+  - just
 homebrew_linux_casks:
   - git-credential-manager
