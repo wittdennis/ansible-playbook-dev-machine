@@ -5,6 +5,7 @@ homebrew_version: "6.0.6" # renovate: datasource=github-releases depName=Homebre
 homebrew_mac_taps:
   - cncf/landscape2
   - siderolabs/tap
+  - terraform-linters/tap
 homebrew_mac_packages:
   - yadm
   - kubectl
@@ -45,6 +46,7 @@ homebrew_mac_packages:
   - session-manager-plugin
   - trivy
   - just
+  - tailscale
 homebrew_mac_casks:
   - vscodium
   - ghostty
@@ -66,10 +68,13 @@ homebrew_mac_casks:
   - microsoft-teams
   - elgato-stream-deck
   - cyberduck
+  - tailscale-app
+  - claude
 
 homebrew_linux_taps:
   - cncf/landscape2
   - siderolabs/tap
+  - terraform-linters/tap
 homebrew_linux_packages:
   - yadm
   - kubectl
