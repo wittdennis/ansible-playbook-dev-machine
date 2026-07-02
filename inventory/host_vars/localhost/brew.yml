@@ -71,6 +71,7 @@ homebrew_mac_casks:
   - tailscale-app
   - claude
   - linear
+  - obsidian
 
 homebrew_linux_taps:
   - cncf/landscape2
