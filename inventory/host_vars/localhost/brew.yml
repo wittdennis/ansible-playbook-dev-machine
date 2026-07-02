@@ -70,6 +70,7 @@ homebrew_mac_casks:
   - cyberduck
   - tailscale-app
   - claude
+  - linear
 
 homebrew_linux_taps:
   - cncf/landscape2
