@@ -6,6 +6,7 @@ homebrew_mac_taps:
   - cncf/landscape2
   - siderolabs/tap
   - terraform-linters/tap
+  - slp/krun
 homebrew_mac_packages:
   - yadm
   - kubectl
@@ -47,6 +48,7 @@ homebrew_mac_packages:
   - trivy
   - just
   - tailscale
+  - krunkit
 homebrew_mac_casks:
   - vscodium
   - ghostty
@@ -72,6 +74,7 @@ homebrew_mac_casks:
   - claude
   - linear
   - obsidian
+  - insta360-link-controller
 
 homebrew_linux_taps:
   - cncf/landscape2
