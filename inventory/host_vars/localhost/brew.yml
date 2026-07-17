@@ -49,6 +49,8 @@ homebrew_mac_packages:
   - just
   - tailscale
   - krunkit
+  - pinentry
+  - pinentry-mac
 homebrew_mac_casks:
   - vscodium
   - ghostty
