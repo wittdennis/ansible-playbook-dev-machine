@@ -51,6 +51,7 @@ homebrew_mac_packages:
   - krunkit
   - pinentry
   - pinentry-mac
+  - gh
 homebrew_mac_casks:
   - vscodium
   - ghostty
@@ -109,5 +110,6 @@ homebrew_linux_packages:
   - siderolabs/tap/talosctl
   - trivy
   - just
+  - gh
 homebrew_linux_casks:
   - git-credential-manager
