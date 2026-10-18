@@ -37,7 +37,7 @@ homebrew_mac_packages:
   - tflint
   - yq
   - golangci-lint
-  - pre-commit
+  - prek
   - tofuenv
   - operator-sdk
   - mas
@@ -117,5 +117,6 @@ homebrew_linux_packages:
   - gh
   - mocli
   - direnv
+  - prek
 homebrew_linux_casks:
   - git-credential-manager

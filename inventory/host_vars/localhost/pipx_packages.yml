@@ -3,4 +3,3 @@ pipx_packages_mac: []
 pipx_packages_linux:
   - ansible-lint
   - ansible-core
-  - pre-commit
